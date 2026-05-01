@@ -18,7 +18,81 @@
       );
     }
   }
-
+// Complete anchor link handling
+$(document).ready(function() {
+    
+    // 1. Handle clicks on anchor links (whether on same page or different page)
+    $('a[href*="#"]').on('click', function(e) {
+        var href = $(this).attr('href');
+        var hash = href.substring(href.indexOf('#'));
+        
+        // Check if it's a same-page link (no filename or current filename)
+        var isSamePage = (href.indexOf('.html') === -1 || 
+                          href.indexOf(window.location.pathname.split('/').pop()) !== -1);
+        
+        if (isSamePage && hash !== '#') {
+            e.preventDefault();
+            var target = $(hash);
+            
+            if (target.length) {
+                var headerHeight = $('.header').outerHeight() || 100;
+                var targetOffset = target.offset().top - headerHeight;
+                
+                $('html, body').animate({
+                    scrollTop: targetOffset
+                }, 800, 'swing');
+                
+                // Update URL without reloading
+                history.pushState(null, null, hash);
+            }
+        }
+    });
+    
+    // 2. Handle hash in URL on page load
+    if (window.location.hash) {
+        var targetId = window.location.hash;
+        var target = $(targetId);
+        
+        if (target.length) {
+            setTimeout(function() {
+                var headerHeight = $('.header').outerHeight() || 100;
+                var targetOffset = target.offset().top - headerHeight;
+                
+                $('html, body').animate({
+                    scrollTop: targetOffset
+                }, 800, 'swing');
+            }, 500);
+        }
+    }
+});
+// Custom fullscreen image viewer
+$(document).ready(function() {
+    // Create overlay
+    $('body').append(`
+        <div class="image-fullscreen-overlay">
+            <button class="close-btn">&times;</button>
+            <img src="" alt="Fullscreen Image">
+        </div>
+    `);
+    
+    // Open fullscreen
+    $('.project-img a, .project-content .title a').on('click', function(e) {
+        e.preventDefault();
+        var imgSrc = $(this).find('img').attr('src');
+        if (!imgSrc) {
+            imgSrc = $(this).closest('.project-item').find('.project-img img').attr('src');
+        }
+        if (imgSrc) {
+            $('.image-fullscreen-overlay img').attr('src', imgSrc);
+            $('.image-fullscreen-overlay').addClass('active');
+        }
+    });
+    
+    // Close fullscreen
+    $('.image-fullscreen-overlay, .image-fullscreen-overlay .close-btn').on('click', function() {
+        $('.image-fullscreen-overlay').removeClass('active');
+    });
+});
   /* ===============================
         Smooth Preloader
         ================================*/
@@ -744,7 +818,11 @@
       spaceBetween: 24,
       slidesPerGroup: 1,
       loop: true,
-      autoplay: false,
+      autoplay: {
+        delay: 1500,  // Faster autoplay interval
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+    },
       grabcursor: true,
       speed: 800,
       breakpoints: {
