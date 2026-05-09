@@ -32,13 +32,17 @@
   --tl-color-grey-2: #9F9FA4;
   --tl-color-border-1: #E3E3E8
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box
 }
-
+p{
+  font-family: "Montserrat", sans-serif!important;
+}
+.project-item .project-content{
+  font-family: "Montserrat", sans-serif!important;
+}
 html {
   overflow-x: hidden;
   max-width: 100%
@@ -3323,9 +3327,9 @@ ul {
 }
 
 .header .primary-header.fixed {
-  background-color: var(--tl-color-heading-primary);
+  background-color: #000;
   top: 0;
-  transition: all .3s ease-in-out
+  transition: all .3s ease-in-out;
 }
 
 @media only screen and (max-width: 992px) {
@@ -4185,7 +4189,7 @@ ul {
   row-gap: 20px;
   padding-bottom: 80px;
   margin-bottom: 25px;
-  border-bottom: 1px solid var(--tl-color-border-1)
+  border-bottom: 1px solid #8b4e027d;
 }
 
 @media(max-width: 1399px) {
@@ -4202,7 +4206,8 @@ ul {
 }
 
 .service-item p {
-  margin-bottom: 0
+  margin-bottom: 0;
+  color: #000;
 }
 
 .about-section {
@@ -4421,7 +4426,9 @@ ul {
 }
 
 .slider-content-wrap .section-heading {
-  margin-bottom: 40px
+  margin-bottom: 40px;
+  min-height: 240px;
+  
 }
 
 @media only screen and (max-width: 992px) {
@@ -4433,11 +4440,18 @@ ul {
 .slider-content-wrap .section-heading .sub-heading {
   border: 1px solid rgba(255, 255, 255, .5)
 }
-
+.service-item .service-top .icon img{
+    filter: sepia(45%) saturate(450%) hue-rotate(5deg) brightness(62%);
+}
+.service-item{
+  background: #CAA05C !important;  
+}
 .slider-content-wrap .section-heading .section-title {
+
   font-size: 120px;
   max-width: 100%;
-  white-space: normal
+  white-space: normal;
+    font-size: 80px;
 }
 
 @media(max-width: 1199px) {
@@ -4857,7 +4871,7 @@ ul {
 }
 
 .process-item {
-  background-color: var(--tl-color-common-white);
+  background-color: #CAA05C;
   border-radius: 18px;
   overflow: hidden;
   position: relative
@@ -4883,7 +4897,7 @@ ul {
 
 .process-item .process-thumb {
   height: 160px;
-  border: 10px solid var(--tl-color-common-white)
+  border: 10px solid #CAA05C;
 }
 
 @media(max-width: 1199px) {
@@ -4916,7 +4930,7 @@ ul {
 }
 
 .process-item .process-content .title span {
-  color: var(--tl-color-theme-primary)
+  color: #fff;
 }
 
 .process-item .process-content p {
